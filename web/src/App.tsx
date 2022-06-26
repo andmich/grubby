@@ -8,15 +8,15 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Routes/PrivateRoute/PrivateRoute';
 
 function App() {
+  const { isAuthenticated } = useAuth0();
+
+  if (isAuthenticated) {
+    return <PrivateRoute><Main /></PrivateRoute>
+  }
+
+
   return (
-    <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/app' element={
-        <PrivateRoute>
-          <Main />
-        </PrivateRoute>
-      } />
-    </Routes>
+    <Login />
   )
 }
 
