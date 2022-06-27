@@ -1,79 +1,17 @@
 import React, { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
+import { Color } from '../Enums/Color';
 import { IPropBase } from '../Interfaces/IPropBase';
 
 export interface INavbarProps extends IPropBase {
-  
+  color?: Color
 }
 
 function Navbar(props: INavbarProps): ReactElement<any, any> {
-  return (
-    <nav className='navbar' role='navigation' aria-label='main navigation'>
-      <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
-        </a>
-
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" className="navbar-menu">
-        <div className="navbar-start">
-          <a className="navbar-item">
-            Home
-          </a>
-
-          <a className="navbar-item">
-            Documentation
-          </a>
-
-          <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">
-              More
-            </a>
-
-            <div className="navbar-dropdown">
-              <a className="navbar-item">
-                About
-              </a>
-              <a className="navbar-item">
-                Jobs
-              </a>
-              <a className="navbar-item">
-                Contact
-              </a>
-              <hr className="navbar-divider" />
-              <a className="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <a className="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a className="button is-light">
-                Log in
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  )
-}
-
-function Nav(props: INavbarProps): JSX.Element {
+  const className = `navbar ${props.color}`;
   return(
     <>
-      <nav className='navbar' role='navigation' aria-label='main navigation'>
+      <nav className={className} role='navigation' aria-label='main navigation'>
         {props.children}
       </nav>
     </>
@@ -98,10 +36,10 @@ export interface IItemProps extends IPropBase {
   hasDropDown?: boolean
   isHoverable?: boolean
   linkTitle?: string
+  to?: string
 }
 
 function Item(props: IItemProps): ReactElement<any, any> {
-
   const dropDown = props.hasDropDown
     ? 'has-dropdown'
     : '';
@@ -124,7 +62,9 @@ function Item(props: IItemProps): ReactElement<any, any> {
           {props.children}
         </Dropdown>
       </div>
-    : <a className={className} onClick={() => props.onClick && props.onClick()}>{props.children}</a>
+    : props.to 
+      ? <Link className={className} to={props.to!} onClick={() => props.onClick && props.onClick()}>{props.children}</Link>
+      : <a className={className} onClick={() => props.onClick && props.onClick()}>{props.children}</a>
   return (
     <>
       {item}
@@ -198,6 +138,5 @@ Navbar.Burger = Burger;
 Navbar.Menu = Menu;
 Navbar.Dropdown = Dropdown;
 Navbar.Divider = Divider;
-Navbar.Nav = Nav;
 
 export default Navbar;

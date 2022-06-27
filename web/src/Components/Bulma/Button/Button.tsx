@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { Color } from '../Enums/Color';
 import { IPropBase } from '../Interfaces/IPropBase';
 
 export enum ButtonType {
@@ -6,21 +7,6 @@ export enum ButtonType {
   Form,
   Submit,
   Reset
-}
-
-export enum ButtonColor {
-  White = 'is-white',
-  Light = 'is-light',
-  Dark = 'is-dark',
-  Black = 'is-black',
-  Text = 'is-text',
-  Ghost = 'is-ghost',
-  Primary = 'is-primary',
-  Link = 'is-link',
-  Info = 'is-info',
-  Success = 'is-success',
-  Warning = 'is-warning',
-  Danger = 'is-danger'
 }
 
 export enum ButtonSize {
@@ -40,7 +26,7 @@ export enum ButtonsSize {
 
 export interface IButtonProps extends IPropBase {
   type?: ButtonType,
-  color?: ButtonColor,
+  color?: Color,
   isLight?: boolean,
   size?: ButtonSize,
   content?: string,
@@ -83,7 +69,7 @@ function getButton(className: string, props: IButtonProps): ReactElement<any, an
 function Button(props: IButtonProps): ReactElement<any, any> {
   const buttonColor = props.color
     ? props.color
-    : ButtonColor.Primary;
+    : Color.Primary;
   const buttonSize = props.size 
     ? props.size 
     : ButtonSize.Default;

@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
-import { Button, ButtonColor, Buttons, ButtonsSize } from "../../Components/Bulma/Button/Button";
 import LoginButton from "../../Components/LoginButton/LoginButton";
 import './Login.sass';
 
